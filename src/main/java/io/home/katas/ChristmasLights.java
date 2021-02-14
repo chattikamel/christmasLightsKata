@@ -19,4 +19,7 @@ public class ChristmasLights {
     public void turnOn(int x, int y) {
         grid[x][y].setOn(true);
     }
+
+    public void turnOff(int x, int y) {
+    }
 }

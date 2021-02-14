@@ -7,4 +7,8 @@ import lombok.Data;
 public class Light {
 
     boolean on;
+
+    public boolean isOff() {
+        return !on;
+    }
 }

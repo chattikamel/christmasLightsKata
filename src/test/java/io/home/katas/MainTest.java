@@ -34,4 +34,15 @@ class MainTest {
         assertThat(christmasLights.getGrid()[x][y]).is(
                 LIGHT_ON_CONDITION);
     }
+
+    @Test
+    void when_christmasLights_turnOff_theLight_in_theSpecificPosition_itShould_lightOff_test() {
+        int x=5, y=6;
+
+        christmasLights.turnOn(x,y);
+        christmasLights.turnOff(x, y);
+
+        assertThat(christmasLights.getGrid()[x][y]).is(
+                new Condition<>(l -> l.isOff(), "Light off test"));
+    }
 }
