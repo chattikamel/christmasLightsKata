@@ -10,6 +10,7 @@ import java.util.Random;
 import java.util.function.Consumer;
 import java.util.stream.Stream;
 
+import static io.home.katas.ChristmasLights.MATRICE_SIZE;
 import static io.home.katas.Position.inRange;
 import static io.home.katas.Position.of;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -131,13 +132,13 @@ class ChristmasLightsTest {
 
 
     private void assertLightIsToggled(Position p0, Position p1, ChristmasLights backUp) {
-        for (int i = 0; i < 1000; i++) {
-            for (int j = 0; j < 1000; j++) {
+        for (int i = 0; i < MATRICE_SIZE; i++) {
+            for (int j = 0; j < MATRICE_SIZE; j++) {
                 if (inRange(p0.x, p1.x, i) && inRange(p0.y, p1.y, j)) {
                     assertThat(christmasLights.grid[i][j] == backUp.grid[i][j])
                             .as("The light must be turn to opposite state !")
                             .isFalse();
-                } else{
+                } else {
                     assertThat(christmasLights.grid[i][j] == backUp.grid[i][j])
                             .as("The light must remain in the same state !")
                             .isTrue();
