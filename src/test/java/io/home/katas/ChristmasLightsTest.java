@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class MainTest {
+class ChristmasLightsTest {
 
     public static final Condition<Light> LIGHT_ON_CONDITION = new Condition<>(Light::isOn, "Light on test");
     public static final Condition<Light> LIGHT_OFF_CONDITION = new Condition<>(Light::isOff, "Light off test");
