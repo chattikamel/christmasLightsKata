@@ -63,4 +63,15 @@ public class ChristmasLights {
     public void toggle(Position position, Position oppositePosition) {
         turn_(position, oppositePosition, Light::opposite);
     }
+
+    public ChristmasLights clone() {
+        ChristmasLights clone = new ChristmasLights();
+        for (int i = 0; i < 1000; i++) {
+            for (int j = 0; j < 1000; j++) {
+                clone.grid[i][j] = grid[i][j];
+            }
+
+        }
+        return clone;
+    }
 }

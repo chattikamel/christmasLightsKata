@@ -10,6 +10,7 @@ import java.util.Random;
 import java.util.function.Consumer;
 import java.util.stream.Stream;
 
+import static io.home.katas.Position.inRange;
 import static io.home.katas.Position.of;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -108,33 +109,35 @@ class ChristmasLightsTest {
 
     @Test
     void when_christmasLights_toggle_aRectangle_itShould_makes__evrey_light_of_the_selected_area_turns_toOpposite_state_test() {
-        christmasLights.turnOn(position, oppositePosition);
 
+        randomizeLightOn();
+
+        ChristmasLights backUp = christmasLights.clone();
+
+
+        christmasLights.toggle(position, oppositePosition);
+
+        assertLightIsToggled(position, oppositePosition, backUp);
+    }
+
+    private void randomizeLightOn() {
         Stream<Integer> xRandStream = new Random().ints(position.x, oppositePosition.x).boxed();
         Stream<Integer> yRandSteam = new Random().ints(position.y, oppositePosition.y).boxed();
 
         Streams.zip(xRandStream, yRandSteam, Position::of)
                 .limit(30)
-                .peek(System.out::println)
                 .forEach(christmasLights::turnOn);
-
-        ChristmasLights backUp = clone(christmasLights);
-
-
-        this.christmasLights.toggle(position, oppositePosition);
-
-        assertLightIsToggled(position, oppositePosition, backUp);
     }
 
 
     private void assertLightIsToggled(Position p0, Position p1, ChristmasLights backUp) {
         for (int i = 0; i < 1000; i++) {
             for (int j = 0; j < 1000; j++) {
-                if (i >= p0.x && i <= p1.x && j >= p0.y && j <= p1.y) {
+                if (inRange(p0.x, p1.x, i) && inRange(p0.y, p1.y, j)) {
                     assertThat(christmasLights.grid[i][j] == backUp.grid[i][j])
                             .as("The light must be turn to opposite state !")
                             .isFalse();
-                } else {
+                } else{
                     assertThat(christmasLights.grid[i][j] == backUp.grid[i][j])
                             .as("The light must remain in the same state !")
                             .isTrue();
@@ -162,17 +165,6 @@ class ChristmasLightsTest {
             }
 
         }
-    }
-
-    private ChristmasLights clone(ChristmasLights christmasLights) {
-        ChristmasLights clone = new ChristmasLights();
-        for (int i = 0; i < 1000; i++) {
-            for (int j = 0; j < 1000; j++) {
-                clone.grid[i][j] = christmasLights.grid[i][j];
-            }
-
-        }
-        return clone;
     }
 
 

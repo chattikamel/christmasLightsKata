@@ -11,4 +11,8 @@ public class Position {
     public static Position of(int x, int y) {
         return builder().x(x).y(y).build();
     }
+
+    public static boolean inRange(int x1, int x2, int i) {
+        return i >= x1 && i <= x2;
+    }
 }
