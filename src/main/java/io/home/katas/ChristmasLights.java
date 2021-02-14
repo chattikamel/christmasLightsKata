@@ -76,4 +76,8 @@ public class ChristmasLights {
         }
         return clone;
     }
+
+    public int litLights() {
+        return 0;
+    }
 }

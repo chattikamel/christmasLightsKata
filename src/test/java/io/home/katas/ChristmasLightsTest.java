@@ -121,6 +121,11 @@ class ChristmasLightsTest {
         assertLightIsToggled(position, oppositePosition, backUp);
     }
 
+    @Test
+    void when_christmasLights_isCreated_the_number_of_lit_lights_is_zero() {
+        assertThat(christmasLights.litLights()).isEqualTo(0);
+    }
+
     private void randomizeLightOn() {
         Stream<Integer> xRandStream = new Random().ints(position.x, oppositePosition.x).boxed();
         Stream<Integer> yRandSteam = new Random().ints(position.y, oppositePosition.y).boxed();
