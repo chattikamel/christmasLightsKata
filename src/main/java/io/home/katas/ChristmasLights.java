@@ -25,5 +25,6 @@ public class ChristmasLights {
     }
 
     public void toggle(int x, int y) {
+        grid[x][y].setOn(grid[x][y].isOff());
     }
 }
