@@ -10,6 +10,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 class MainTest {
 
     public static final Condition<Light> LIGHT_ON_CONDITION = new Condition<>(Light::isOn, "Light on test");
+    public static final Condition<Light> LIGHT_OFF_CONDITION = new Condition<>(Light::isOff, "Light off test");
+
     private ChristmasLights christmasLights;
 
     @BeforeEach
@@ -43,6 +45,6 @@ class MainTest {
         christmasLights.turnOff(x, y);
 
         assertThat(christmasLights.getGrid()[x][y]).is(
-                new Condition<>(l -> l.isOff(), "Light off test"));
+                LIGHT_OFF_CONDITION);
     }
 }
