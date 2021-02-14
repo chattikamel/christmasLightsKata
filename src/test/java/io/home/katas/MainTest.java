@@ -33,8 +33,7 @@ class MainTest {
         int x=5, y=6;
         christmasLights.turnOn(x, y);
 
-        assertThat(christmasLights.getGrid()[x][y]).is(
-                LIGHT_ON_CONDITION);
+        assertLightIsOn(x, y);
     }
 
     @Test
@@ -44,8 +43,7 @@ class MainTest {
         christmasLights.turnOn(x,y);
         christmasLights.turnOff(x, y);
 
-        assertThat(christmasLights.getGrid()[x][y]).is(
-                LIGHT_OFF_CONDITION);
+        assertLightIsOff(x, y);
     }
 
     @Test
@@ -55,7 +53,29 @@ class MainTest {
         christmasLights.turnOn(x,y);
         christmasLights.toggle(x, y);
 
+        assertLightIsOff(x, y);
+    }
+
+    @Test
+    void when_christmasLights_toggle_aLightOff_in_theSpecificPosition_itShould_turnItOn_test() {
+        int x=5, y=6;
+
+        christmasLights.turnOff(x,y);
+        christmasLights.toggle(x, y);
+
+        assertLightIsOn(x, y);
+    }
+
+    private void assertLightIs(int x, int y, Condition<Light> lightOnCondition) {
         assertThat(christmasLights.getGrid()[x][y]).is(
-                LIGHT_OFF_CONDITION);
+                lightOnCondition);
+    }
+
+    private void assertLightIsOn(int x, int y){
+        assertLightIs(x, y, LIGHT_ON_CONDITION);
+    }
+
+    private void assertLightIsOff(int x, int y){
+        assertLightIs(x, y, LIGHT_OFF_CONDITION);
     }
 }
