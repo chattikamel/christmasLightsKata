@@ -59,4 +59,8 @@ public class ChristmasLights {
 
         }
     }
+
+    public void toggle(Position position, Position oppositePosition) {
+        turn_(position, oppositePosition, Light::opposite);
+    }
 }

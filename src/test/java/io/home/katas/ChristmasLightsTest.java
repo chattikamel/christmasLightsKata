@@ -1,11 +1,14 @@
 package io.home.katas;
 
 
+import com.google.common.collect.Streams;
 import org.assertj.core.api.Condition;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.Random;
 import java.util.function.Consumer;
+import java.util.stream.Stream;
 
 import static io.home.katas.Position.of;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -103,6 +106,45 @@ class ChristmasLightsTest {
         assertLightIsOff(position, oppositePosition);
     }
 
+    @Test
+    void when_christmasLights_toggle_aRectangle_itShould_makes__evrey_light_of_the_selected_area_turns_toOpposite_state_test() {
+        christmasLights.turnOn(position, oppositePosition);
+
+        Stream<Integer> xRandStream = new Random().ints(position.x, oppositePosition.x).boxed();
+        Stream<Integer> yRandSteam = new Random().ints(position.y, oppositePosition.y).boxed();
+
+        Streams.zip(xRandStream, yRandSteam, Position::of)
+                .limit(30)
+                .peek(System.out::println)
+                .forEach(christmasLights::turnOn);
+
+        ChristmasLights backUp = clone(christmasLights);
+
+
+        this.christmasLights.toggle(position, oppositePosition);
+
+        assertLightIsToggled(position, oppositePosition, backUp);
+    }
+
+
+    private void assertLightIsToggled(Position p0, Position p1, ChristmasLights backUp) {
+        for (int i = 0; i < 1000; i++) {
+            for (int j = 0; j < 1000; j++) {
+                if (i >= p0.x && i <= p1.x && j >= p0.y && j <= p1.y) {
+                    assertThat(christmasLights.grid[i][j] == backUp.grid[i][j])
+                            .as("The light must be turn to opposite state !")
+                            .isFalse();
+                } else {
+                    assertThat(christmasLights.grid[i][j] == backUp.grid[i][j])
+                            .as("The light must remain in the same state !")
+                            .isTrue();
+                }
+
+            }
+
+        }
+    }
+
 
     private void assertLightIsOff(Position position, Position oppositePosition) {
         assertLightIs_(position, oppositePosition, this::assertLightIsOff);
@@ -110,7 +152,7 @@ class ChristmasLightsTest {
 
 
     private void assertLightIsOn(Position position, Position oppositePosition) {
-       assertLightIs_(position, oppositePosition, this::assertLightIsOn);
+        assertLightIs_(position, oppositePosition, this::assertLightIsOn);
     }
 
     private void assertLightIs_(Position position, Position oppositePosition, Consumer<Position> consumer) {
@@ -120,6 +162,17 @@ class ChristmasLightsTest {
             }
 
         }
+    }
+
+    private ChristmasLights clone(ChristmasLights christmasLights) {
+        ChristmasLights clone = new ChristmasLights();
+        for (int i = 0; i < 1000; i++) {
+            for (int j = 0; j < 1000; j++) {
+                clone.grid[i][j] = christmasLights.grid[i][j];
+            }
+
+        }
+        return clone;
     }
 
 

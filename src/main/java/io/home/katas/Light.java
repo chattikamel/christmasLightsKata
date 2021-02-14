@@ -23,4 +23,8 @@ public class Light {
     public Light off() {
         return new Light(false);
     }
+
+    public Light opposite() {
+        return new Light(!on);
+    }
 }
