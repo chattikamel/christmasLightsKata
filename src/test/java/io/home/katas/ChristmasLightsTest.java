@@ -13,10 +13,14 @@ class ChristmasLightsTest {
     public static final Condition<Light> LIGHT_OFF_CONDITION = new Condition<>(Light::isOff, "Light off test");
 
     private ChristmasLights christmasLights;
+    private int x;
+    private int y;
 
     @BeforeEach
     void setUp() {
         christmasLights = new ChristmasLights();
+        x = 5;
+        y = 6;
     }
 
     @Test
@@ -30,7 +34,6 @@ class ChristmasLightsTest {
 
     @Test
     void when_christmasLights_turnOn_theLight_in_theSpecificPosition_itShould_lightOn_test() {
-        int x=5, y=6;
         christmasLights.turnOn(x, y);
 
         assertLightIsOn(x, y);
@@ -38,7 +41,6 @@ class ChristmasLightsTest {
 
     @Test
     void when_christmasLights_turnOff_theLight_in_theSpecificPosition_itShould_lightOff_test() {
-        int x=5, y=6;
 
         christmasLights.turnOn(x,y);
         christmasLights.turnOff(x, y);
@@ -48,7 +50,6 @@ class ChristmasLightsTest {
 
     @Test
     void when_christmasLights_toggle_aLightOn_in_theSpecificPosition_itShould_turnItOff_test() {
-        int x=5, y=6;
 
         christmasLights.turnOn(x,y);
         christmasLights.toggle(x, y);
@@ -58,13 +59,15 @@ class ChristmasLightsTest {
 
     @Test
     void when_christmasLights_toggle_aLightOff_in_theSpecificPosition_itShould_turnItOn_test() {
-        int x=5, y=6;
 
         christmasLights.turnOff(x,y);
         christmasLights.toggle(x, y);
 
         assertLightIsOn(x, y);
     }
+
+
+
 
     private void assertLightIs(int x, int y, Condition<Light> lightOnCondition) {
         assertThat(christmasLights.getGrid()[x][y]).is(
