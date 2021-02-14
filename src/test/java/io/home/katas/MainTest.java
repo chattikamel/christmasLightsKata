@@ -26,6 +26,6 @@ class MainTest {
         christmasLights.turnOn(x, y);
 
         assertThat(christmasLights.getGrid()[x][y]).is(
-                new Condition<>((Light l) -> l.isOn(), "Light on test"));
+                new Condition<>(Light::isOn, "Light on test"));
     }
 }
