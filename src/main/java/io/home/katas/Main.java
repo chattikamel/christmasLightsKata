@@ -2,7 +2,6 @@ package io.home.katas;
 
 import org.javatuples.Triplet;
 
-import java.util.Arrays;
 import java.util.function.BiConsumer;
 
 import static io.home.katas.Position.of;
