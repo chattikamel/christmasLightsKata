@@ -7,14 +7,14 @@ import java.util.function.Function;
 @Data
 public class ChristmasLights {
 
-    public static final int MATRICE_SIZE = 1000;
+    public static final int MATRIX_SIZE = 1000;
 
     Light[][] grid;
 
     public ChristmasLights() {
-        grid = new Light[MATRICE_SIZE][MATRICE_SIZE];
-        for (int i = 0; i < MATRICE_SIZE; i++) {
-            for (int j = 0; j < MATRICE_SIZE; j++) {
+        grid = new Light[MATRIX_SIZE][MATRIX_SIZE];
+        for (int i = 0; i < MATRIX_SIZE; i++) {
+            for (int j = 0; j < MATRIX_SIZE; j++) {
                 grid[i][j] = new Light();
             }
         }
@@ -68,8 +68,8 @@ public class ChristmasLights {
 
     public ChristmasLights clone() {
         ChristmasLights clone = new ChristmasLights();
-        for (int i = 0; i < MATRICE_SIZE; i++) {
-            for (int j = 0; j < MATRICE_SIZE; j++) {
+        for (int i = 0; i < MATRIX_SIZE; i++) {
+            for (int j = 0; j < MATRIX_SIZE; j++) {
                 clone.grid[i][j] = grid[i][j];
             }
 
