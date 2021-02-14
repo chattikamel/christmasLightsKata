@@ -20,11 +20,24 @@ public class ChristmasLights {
         grid[x][y].setOn(true);
     }
 
+    public void turnOn(Position position) {
+        grid[position.x][position.y].setOn(true);
+
+    }
+
     public void turnOff(int x, int y) {
         grid[x][y].setOn(false);
     }
 
+    public void turnOff(Position position) {
+        grid[position.x][position.y].setOn(false);
+    }
+
     public void toggle(int x, int y) {
         grid[x][y].setOn(grid[x][y].isOff());
+    }
+
+    public void toggle(Position position) {
+        grid[position.x][position.y].setOn(grid[position.x][position.y].isOff());
     }
 }

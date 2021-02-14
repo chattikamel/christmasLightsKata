@@ -9,18 +9,19 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class ChristmasLightsTest {
 
-    public static final Condition<Light> LIGHT_ON_CONDITION = new Condition<>(Light::isOn, "Light on test");
-    public static final Condition<Light> LIGHT_OFF_CONDITION = new Condition<>(Light::isOff, "Light off test");
+    public static final Condition<Light> LIGHT_ON_CONDITION = new Condition<>(Light::isOn, "Light on");
+    public static final Condition<Light> LIGHT_OFF_CONDITION = new Condition<>(Light::isOff, "Light off");
 
     private ChristmasLights christmasLights;
     private int x;
     private int y;
+    private Position position;
 
     @BeforeEach
     void setUp() {
         christmasLights = new ChristmasLights();
         x = 5;
-        y = 6;
+        position = Position.builder().x(x + 1).y(y + 2).build();
     }
 
     @Test
@@ -35,8 +36,10 @@ class ChristmasLightsTest {
     @Test
     void when_christmasLights_turnOn_theLight_in_theSpecificPosition_itShould_lightOn_test() {
         christmasLights.turnOn(x, y);
+        christmasLights.turnOn(position);
 
         assertLightIsOn(x, y);
+        assertLightIsOn(position);
     }
 
     @Test
@@ -45,7 +48,11 @@ class ChristmasLightsTest {
         christmasLights.turnOn(x,y);
         christmasLights.turnOff(x, y);
 
+        christmasLights.turnOn(position);
+        christmasLights.turnOff(position);
+
         assertLightIsOff(x, y);
+        assertLightIsOff(position);
     }
 
     @Test
@@ -54,7 +61,11 @@ class ChristmasLightsTest {
         christmasLights.turnOn(x,y);
         christmasLights.toggle(x, y);
 
+        christmasLights.turnOn(position);
+        christmasLights.toggle(position);
+
         assertLightIsOff(x, y);
+        assertLightIsOff(position);
     }
 
     @Test
@@ -63,7 +74,11 @@ class ChristmasLightsTest {
         christmasLights.turnOff(x,y);
         christmasLights.toggle(x, y);
 
+        christmasLights.turnOff(position);
+        christmasLights.toggle(position);
+
         assertLightIsOn(x, y);
+        assertLightIsOn(position);
     }
 
 
@@ -78,7 +93,16 @@ class ChristmasLightsTest {
         assertLightIs(x, y, LIGHT_ON_CONDITION);
     }
 
+    private void assertLightIsOn(Position p){
+        assertLightIs(p.x, p.y, LIGHT_ON_CONDITION);
+    }
+
     private void assertLightIsOff(int x, int y){
         assertLightIs(x, y, LIGHT_OFF_CONDITION);
     }
+
+    private void assertLightIsOff(Position p){
+        assertLightIs(p.x, p.y, LIGHT_OFF_CONDITION);
+    }
+
 }
