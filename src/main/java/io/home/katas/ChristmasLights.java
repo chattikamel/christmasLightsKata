@@ -49,4 +49,13 @@ public class ChristmasLights {
 
         }
     }
+
+    public void turnOff(Position position, Position oppositePosition) {
+        for (int i = position.x; i <= oppositePosition.x; i++) {
+            for (int j = position.y; j <= oppositePosition.y; j++) {
+                turnOff(i, j);
+            }
+
+        }
+    }
 }

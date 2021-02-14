@@ -92,6 +92,25 @@ class ChristmasLightsTest {
         assertLightIsOn(position, oppositePosition);
     }
 
+    @Test
+    void when_christmasLights_turnOff_aRectangle_itShould_lightOff_the_selected_area_test() {
+        christmasLights.turnOn(position, oppositePosition);
+
+        christmasLights.turnOff(position, oppositePosition);
+
+        assertLightIsOff(position, oppositePosition);
+    }
+
+    private void assertLightIsOff(Position position, Position oppositePosition) {
+        for (int i = position.x; i <= oppositePosition.x; i++) {
+            for (int j = position.y; j <= oppositePosition.y; j++) {
+                assertLightIsOff(i, j);
+            }
+
+        }
+    }
+
+
     private void assertLightIsOn(Position position, Position oppositePosition) {
         for (int i = position.x; i <= oppositePosition.x; i++) {
             for (int j = position.y; j <= oppositePosition.y; j++) {
