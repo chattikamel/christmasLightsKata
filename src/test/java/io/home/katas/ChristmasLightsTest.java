@@ -5,6 +5,8 @@ import org.assertj.core.api.Condition;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.function.Consumer;
+
 import static io.home.katas.Position.of;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -101,20 +103,20 @@ class ChristmasLightsTest {
         assertLightIsOff(position, oppositePosition);
     }
 
-    private void assertLightIsOff(Position position, Position oppositePosition) {
-        for (int i = position.x; i <= oppositePosition.x; i++) {
-            for (int j = position.y; j <= oppositePosition.y; j++) {
-                assertLightIsOff(i, j);
-            }
 
-        }
+    private void assertLightIsOff(Position position, Position oppositePosition) {
+        assertLightIs_(position, oppositePosition, this::assertLightIsOff);
     }
 
 
     private void assertLightIsOn(Position position, Position oppositePosition) {
+       assertLightIs_(position, oppositePosition, this::assertLightIsOn);
+    }
+
+    private void assertLightIs_(Position position, Position oppositePosition, Consumer<Position> consumer) {
         for (int i = position.x; i <= oppositePosition.x; i++) {
             for (int j = position.y; j <= oppositePosition.y; j++) {
-                assertLightIsOn(i, j);
+                consumer.accept(of(i, j));
             }
 
         }
