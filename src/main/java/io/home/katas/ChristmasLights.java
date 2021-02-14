@@ -78,6 +78,14 @@ public class ChristmasLights {
     }
 
     public int litLights() {
-        return 0;
+        int count = 0;
+        for (int i = 0; i < MATRIX_SIZE; i++) {
+            for (int j = 0; j < MATRIX_SIZE; j++) {
+                if (grid[i][j].on)
+                    count++;
+            }
+
+        }
+        return count;
     }
 }

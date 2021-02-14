@@ -126,6 +126,12 @@ class ChristmasLightsTest {
         assertThat(christmasLights.litLights()).isEqualTo(0);
     }
 
+    @Test
+    void when_christmasLights_turnOn_1_light_the_number_of_lit_lights_is_1() {
+        christmasLights.turnOn(x, y);
+        assertThat(christmasLights.litLights()).isEqualTo(1);
+    }
+
     private void randomizeLightOn() {
         Stream<Integer> xRandStream = new Random().ints(position.x, oppositePosition.x).boxed();
         Stream<Integer> yRandSteam = new Random().ints(position.y, oppositePosition.y).boxed();
