@@ -138,6 +138,14 @@ class ChristmasLightsTest {
         assertThat(christmasLights.litLights()).isEqualTo(30);
     }
 
+    @Test
+    void when_christmasLights_toggle_twice_theSameArea_then__the_number_of_lit_lights_is_0() {
+        christmasLights.toggle(position, oppositePosition);
+        christmasLights.toggle(position, oppositePosition);
+        assertThat(christmasLights.litLights()).isEqualTo(0);
+    }
+
+
     private void randomizeLightOn() {
         Stream<Integer> xRandStream = new Random().ints(position.x, oppositePosition.x).boxed();
         Stream<Integer> yRandSteam = new Random().ints(position.y, oppositePosition.y).boxed();
