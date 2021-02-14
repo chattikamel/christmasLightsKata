@@ -2,6 +2,8 @@ package io.home.katas;
 
 import lombok.Data;
 
+import java.util.function.Function;
+
 @Data
 public class ChristmasLights {
 
@@ -42,18 +44,17 @@ public class ChristmasLights {
     }
 
     public void turnOn(Position position, Position oppositePosition) {
-        for (int i = position.x; i <= oppositePosition.x; i++) {
-            for (int j = position.y; j <= oppositePosition.y; j++) {
-                turnOn(i, j);
-            }
-
-        }
+        turn_(position, oppositePosition, Light::on);
     }
 
     public void turnOff(Position position, Position oppositePosition) {
+        turn_(position, oppositePosition, Light::off);
+    }
+
+    public void turn_(Position position, Position oppositePosition, Function<Light, Light> mapper) {
         for (int i = position.x; i <= oppositePosition.x; i++) {
             for (int j = position.y; j <= oppositePosition.y; j++) {
-                turnOff(i, j);
+                grid[i][j] = mapper.apply(grid[i][j]);
             }
 
         }
