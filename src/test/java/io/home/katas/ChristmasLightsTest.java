@@ -17,6 +17,7 @@ class ChristmasLightsTest {
     private int x;
     private int y;
     private Position position;
+    private Position oppositePosition;
 
     @BeforeEach
     void setUp() {
@@ -24,6 +25,7 @@ class ChristmasLightsTest {
         x = 5;
         y = 6;
         position = of(x + 1, y + 2);
+        oppositePosition = of(position.x + 100, position.y + 100);
     }
 
     @Test
@@ -81,6 +83,22 @@ class ChristmasLightsTest {
 
         assertLightIsOn(x, y);
         assertLightIsOn(position);
+    }
+
+    @Test
+    void when_christmasLights_turnOn_aRectangle_itShould_lightOn_the_selected_area_test() {
+        christmasLights.turnOn(position, oppositePosition);
+
+        assertLightIsOn(position, oppositePosition);
+    }
+
+    private void assertLightIsOn(Position position, Position oppositePosition) {
+        for (int i = position.x; i <= oppositePosition.x; i++) {
+            for (int j = position.y; j <= oppositePosition.y; j++) {
+                assertLightIsOn(i, j);
+            }
+
+        }
     }
 
 

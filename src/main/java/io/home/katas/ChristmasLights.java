@@ -40,4 +40,13 @@ public class ChristmasLights {
     public void toggle(Position position) {
         grid[position.x][position.y].setOn(grid[position.x][position.y].isOff());
     }
+
+    public void turnOn(Position position, Position oppositePosition) {
+        for (int i = position.x; i <= oppositePosition.x; i++) {
+            for (int j = position.y; j <= oppositePosition.y; j++) {
+                turnOn(i, j);
+            }
+
+        }
+    }
 }
