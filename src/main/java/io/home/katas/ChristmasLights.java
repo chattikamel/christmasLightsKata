@@ -5,9 +5,18 @@ import lombok.Data;
 @Data
 public class ChristmasLights {
 
-    Object[][] grid;
+    Light[][] grid;
 
     public ChristmasLights() {
-        grid = new Object[1000][1000];
+        grid = new Light[1000][1000];
+        for (int i = 0; i < 1000; i++) {
+            for (int j = 0; j <1000 ; j++) {
+                grid[i][j]= new Light();
+            }
+        }
+    }
+
+    public void turnOn(int x, int y){
+
     }
 }
